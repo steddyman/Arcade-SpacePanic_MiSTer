@@ -126,7 +126,7 @@ assign VIDEO_ARY = (!ar) ? ((status[2] | mod_ponp) ? 8'd3 : 8'd4) : 12'd0;
 
 `include "build_id.v" 
 localparam CONF_STR = {
-	"A.PACMAN;;",
+	"Space panic;;",
 	"H0OEF,Aspect ratio,Original,Full Screen,[ARC1],[ARC2];",
 	"H1H0O2,Orientation,Vert,Horz;",
 	"O35,Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;",
@@ -148,8 +148,8 @@ pll pll
 (
 	.refclk(CLK_50M),
 	.rst(0),
-	.outclk_0(clk_vid),
-	.outclk_1(clk_sys),
+	.outclk_0(clk_vid),		// 48.648 Mhz
+	.outclk_1(clk_sys),		// 24.324 Mhz
 	.locked(pll_locked)
 );
 
