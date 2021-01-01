@@ -1,12 +1,42 @@
 Sprites
-    - 4 bytes per Sprite
-        0 - Sprite Flags:
-            bits
-            7 - Size: 0 = 32x32
-                      1 = 16x16
-        1 - 
-        2 - 
-        3 - colour = colour code
-    - Sprite ROM Layout
-        - Made up of two bitplanes, the 2nd follows the end of the 1st (50% in ROM)
-        - 
+    - 4 bytes per Sprite - 8 sprites total
+        - Located at address 0x6000 to 0x601f in memory
+        - Sprite bits decoded as:
+            0 - Sprite Flags:
+                bits
+                7 - Size: 0 = 32x32
+                        1 = 16x16
+            1 - 
+            2 - 
+            3 - colour = colour code
+    - Sprite ROM Layout - 16x16
+        - Made up of two bitplanes, the 2nd follows the end of the 1st (50% into ROM)
+        - 2 bits per pixel for a total of 4 colours
+        - First 16 bytes are left side of Sprite
+        - Next 16 bytes are right side of Sprite
+    - Sprite ROM Layout - 32x32
+        - Made up of two bitplanes, the 2nd follows the end of the 1st (50% into ROM)
+        - 2 bits per pixel for a total of 4 colours
+        - First 32 bytes are column 0 (left) side of Sprite
+        - Next 32 bytes are column 1 of Sprite        
+        - Next 32 bytes are column 2 of Sprite        
+        - Next 32 bytes are column 3 (right) side of Sprite        
+    - Palette Memory is 32 length located in 'proms' region - Only used for Sprites
+        - Normal background palette is fixed 
+            - Colours  0 -  7 = Direct values 0-7 of bits (1 bit per colour) (0xFF or 0x00)
+            - Colours  8 - 15 = as above, but B value = 0xAA rather than 0xFF
+            - Colours 16 - 48 = Colour for 
+    - Flip screen register for cocktail mode
+        - Memory location 0x700f
+        - Bit 7 is the only one used.  1 = flip screen
+    - Only 4 MAME colour registers, that can be either 0 or 1 (intensity?)
+        - Memory locations 0x700c - 0x700e in address map
+        - Any value other than 0 indicates a value of 1 in colour register lookup
+        - Bit 0 = Becomes bit 9 of offset into proms
+        - Bit 1 = Shift intensity 4 bits.
+        - Bit 2 = Becomes bit 10 of offset into proms
+    - Offset for X and Y screen position into user1 memory ROM region  (Screem colour table)
+        - Bit 10 = Colour Register 2 bit
+        - Bit 9 = Colour Register 0 bit
+        - Bits 8 - 5 = X position (upper 4 bits)
+        - Bits 4 - 0 = Y position >> 3
