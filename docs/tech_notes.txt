@@ -1,0 +1,12 @@
+Sprites
+    - 4 bytes per Sprite
+        0 - Sprite Flags:
+            bits
+            7 - Size: 0 = 32x32
+                      1 = 16x16
+        1 - 
+        2 - 
+        3 - colour = colour code
+    - Sprite ROM Layout
+        - Made up of two bitplanes, the 2nd follows the end of the 1st (50% in ROM)
+        - 
